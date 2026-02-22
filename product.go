@@ -31,6 +31,10 @@ func manageProduct() {
 	fmt.Printf("add Product %d ,error %v\n\n", product3.ID, err)
 
 	err = RemoveProduct(inventory, product6.ID)
+	//Is better to check error like this
+	//if err != nil{
+	//@TODO
+	}
 	fmt.Printf("remove Product %d ,error %v\n\n", product6.ID, err)
 
 	quantity, exists := CheckStock(inventory, product1.ID)
@@ -45,6 +49,7 @@ func manageProduct() {
 }
 
 // task 2 ======================================================
+//Is better to use Reciever method
 func AddProduct(inventory map[int]Product, product Product) error {
 	if _, exists := inventory[product.ID]; exists {
 		return fmt.Errorf("Product with ID %d already exists", product.ID)
@@ -53,6 +58,7 @@ func AddProduct(inventory map[int]Product, product Product) error {
 	return nil
 }
 
+//Is better to use Reciever method
 func RemoveProduct(inventory map[int]Product, productID int) error {
 	if _, exists := inventory[productID]; !exists {
 		return fmt.Errorf("Product with ID %d does not exists", productID)
@@ -61,6 +67,7 @@ func RemoveProduct(inventory map[int]Product, productID int) error {
 	return nil
 }
 
+//Is better to use Reciever method
 func CheckStock(inventory map[int]Product, productID int) (int, bool) {
 	if product, exists := inventory[productID]; exists {
 		return product.Quantity, true
