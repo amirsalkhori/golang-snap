@@ -104,17 +104,23 @@ func ApplyDiscountRules(order Order, rules []DiscountRule) Order {
 }
 
 func ProcessOrders(orders []Order, rules []DiscountRule) []Order {
+	//Chech nil safe pointer for the both orders and rules
+	
 	for i := range orders {
 		order := &orders[i]
 
+		//Use const
 		order.Status = "processing"
 		*order = ApplyDiscountRules(*order, rules)
+		//Use const
 		order.Status = "completed"
 	}
 	return orders
 }
 
+//Instead of use status as a string, use const
 func FilterOrdersByStatus(orders []Order, status string) []Order {
+	//Chech nil safe pointer for the the orders
 	var filteredOrders []Order
 	for _, order := range orders {
 		if order.Status == status {
@@ -125,6 +131,7 @@ func FilterOrdersByStatus(orders []Order, status string) []Order {
 }
 
 func CalculateOrderStatistics(orders []Order) map[string]interface{} {
+		//Chech nil safe pointer for the the orders
 	orderStatus := make(map[string]interface{})
 
 	totalOrders := len(orders)
@@ -132,6 +139,7 @@ func CalculateOrderStatistics(orders []Order) map[string]interface{} {
 	totalRevenue := 0.0
 	totalDiscount := 0.0
 	for _, order := range orders {
+			//Use const
 		if order.Status == "completed" {
 			completedOrders++
 			totalRevenue += order.Total - order.Discount
